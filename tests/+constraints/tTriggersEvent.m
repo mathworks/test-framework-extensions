@@ -5,7 +5,7 @@ classdef tTriggersEvent < matlab.unittest.TestCase
         function tEventTriggered(this)
             
             % Define function to call
-            d = DummyEventClass();
+            d = constraints.DummyEventClass();
             fcn = @() d.triggerTestEvent();
             
             % Check that the event was fired
@@ -30,7 +30,7 @@ classdef tTriggersEvent < matlab.unittest.TestCase
         function tEventNotTriggered(this)
             
             % Define function to call
-            d = DummyEventClass();
+            d = constraints.DummyEventClass();
             fcn = @() d.triggerTestEvent();
             
             % Check that the event was fired

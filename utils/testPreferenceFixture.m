@@ -1,1 +1,0 @@
-res = runTestWithCoverage(?tPreferenceFixture,"tbx\+matlab\+unittest\+fixtures\PreferenceFixture.m")

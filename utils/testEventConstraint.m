@@ -1,1 +1,0 @@
-res = runTestWithCoverage(?tTriggersEvent,"tbx\+matlab\+unittest\+constraints\TriggersEvent.m")
