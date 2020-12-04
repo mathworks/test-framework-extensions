@@ -1,6 +1,4 @@
 classdef FigureFixture < matlab.unittest.fixtures.Fixture
-    % FigureFixture creates a figure in the property FigureHandle. The
-    % figure is deleted when the fixture is torn down.
     
     properties (SetAccess = private)
         FigureHandle
@@ -30,6 +28,16 @@ classdef FigureFixture < matlab.unittest.fixtures.Fixture
                 delete(fixture.FigureHandle)
             end
                 
+        end
+        
+    end
+    
+    methods (Access = protected)
+        
+        function tf = isCompatible(this,otherfx)
+            
+            tf = isequal(this.FigureCreationArgs,otherfx.FigureCreationArgs);
+            
         end
         
     end
