@@ -1,7 +1,15 @@
 # Testing Tools
 
-Testing tools provides a number of utilities to aid testing of MATLAB code:
+Testing tools provides a number of utilities to aid testing of MATLAB code.
+
+Fixtures:
 1.  `matlab.unittest.fixtures.PreferenceFixture` - override a MATLAB preference and restore it on teardown.
+2.  `matlab.unittest.fixtures.FigureFixture` - create a figure and close it on teardown.
+
+Constraints:
+1.  `matlab.unittest.constraints.DatetimeTolerance` - allow non-exact matching of datetimes.
+2.  `matlab.unittest.constraints.HasStringLengthLessThan` - check that string length is less than a set value.
+3.  `matlab.unittest.constraints.IsMemberOfSet` - check to see if value is a member of a string, celltr, or double array.
 2.  `matlab.unittest.constraints.TriggersEvent` - constraint to check that an object has triggered a particular event.
 
 Unit tests in the `tests` folder provides examples of how to use them.
