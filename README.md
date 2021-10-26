@@ -5,6 +5,7 @@ Testing tools provides a number of utilities to aid testing of MATLAB code.
 Fixtures:
 1.  `matlab.unittest.fixtures.PreferenceFixture` - override a MATLAB preference and restore it on teardown.
 2.  `matlab.unittest.fixtures.FigureFixture` - create a figure and close it on teardown.
+3.  `matlab.unittest.fixtures.SimulinkModelFixture` - load a Simulink model and close it on teardown.
 
 Constraints:
 1.  `matlab.unittest.constraints.DatetimeTolerance` - allow non-exact matching of datetimes.
