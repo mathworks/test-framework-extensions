@@ -11,7 +11,8 @@ Constraints:
 1.  `matlab.unittest.constraints.DatetimeTolerance` - allow non-exact matching of datetimes.
 2.  `matlab.unittest.constraints.HasStringLengthLessThan` - check that string length is less than a set value.
 3.  `matlab.unittest.constraints.IsMemberOfSet` - check to see if value is a member of a string, celltr, or double array.
-2.  `matlab.unittest.constraints.TriggersEvent` - constraint to check that an object has triggered a particular event.
+4.  `matlab.unittest.constraints.TriggersEvent` - constraint to check that an object has triggered a particular event.
+5.  `matlab.unittest.constraints.MatchesStatistically` - are at least a certain percentage of elements equal within a tolerance.
 
 Unit tests in the `tests` folder provides examples of how to use them.
 
