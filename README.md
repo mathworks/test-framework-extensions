@@ -1,18 +1,22 @@
 # Testing Tools
 
-Testing tools provides a number of utilities to aid testing of MATLAB code.
+Testing tools provides a number of utilities to aid the testing of MATLAB code.
 
 Fixtures:
-1.  `matlab.unittest.fixtures.PreferenceFixture` - override a MATLAB preference and restore it on teardown.
-2.  `matlab.unittest.fixtures.FigureFixture` - create a figure and close it on teardown.
+1.  `matlab.unittest.fixtures.FigureFixture` - create a figure and close it on teardown.
+2.  `matlab.unittest.fixtures.PreferenceFixture` - override a MATLAB preference and restore it on teardown.
 3.  `matlab.unittest.fixtures.SimulinkModelFixture` - load a Simulink model and close it on teardown.
+4.  `matlab.unittest.fixtures.SuppressParpoolAutocreateFixture` - suppress the automatic creation of parpools and restore the original setting in teardown.
 
 Constraints:
 1.  `matlab.unittest.constraints.DatetimeTolerance` - allow non-exact matching of datetimes.
 2.  `matlab.unittest.constraints.HasStringLengthLessThan` - check that string length is less than a set value.
-3.  `matlab.unittest.constraints.IsMemberOfSet` - check to see if value is a member of a string, celltr, or double array.
-4.  `matlab.unittest.constraints.TriggersEvent` - constraint to check that an object has triggered a particular event.
-5.  `matlab.unittest.constraints.MatchesStatistically` - are at least a certain percentage of elements equal within a tolerance.
+3.  `matlab.unittest.constraints.IsEqualVector` - are two vectors equal irrespective of row or column orientation.
+4.  `matlab.unittest.constraints.IsEquivalentText` - is text equal irrespective of `string`, `char`, or `cellstr` type.
+5.  `matlab.unittest.constraints.IsMemberOfSet` - check to see if value is a member of a string, celltr, or double array (deprecated - use built-in `IsSupersetOf` and `IsSubsetOf`).
+6.  `matlab.unittest.constraints.IsSamePathAs` - are paths equal irrespective of data type, file separator, and (Windows) capitalisation.
+7.  `matlab.unittest.constraints.MatchesStatistically` - are at least a certain percentage of elements equal within a tolerance.
+8.  `matlab.unittest.constraints.TriggersEvent` - constraint to check that an object has triggered a particular event.
 
 Unit tests in the `tests` folder provides examples of how to use them.
 
