@@ -58,15 +58,17 @@ classdef NotifiesPropertyEvent < ...
 
             if ~constraint.Negated
 
-                constraint.evaluateConstraint( fcn )
-                fcnName = string( char( constraint.EvaluatedFunction ) );
+                constraint.evaluateConstraint( fcn );
+                fcnName = func2str( constraint.EvaluatedFunction );
 
                 if constraint.TestPassed
                     str = "Event " + constraint.EventName + ...
-                        " was triggered by " + fcnName + ".";
+                        " for property " + constraint.PropertyName + ...
+                        " was notified by " + fcnName + ".";
                 elseif ~constraint.TestPassed
                     str = "Event " + constraint.EventName + ...
-                        " was not triggered by " + fcnName + ".";
+                        " for property " + constraint.PropertyName + ...
+                        " was not notified by " + fcnName + ".";
                 else
                     str = "The test has not been run yet";
                 end % if
@@ -95,15 +97,17 @@ classdef NotifiesPropertyEvent < ...
 
             if constraint.Negated
 
-                constraint.evaluateConstraint( fcn )
+                constraint.evaluateConstraint( fcn );
                 fcnName = string( char( constraint.EvaluatedFunction ) );
 
                 if ~constraint.TestPassed
                     str = "Event " + constraint.EventName + ...
-                        " was not triggered by " + fcnName + ".";
+                        " for property " + constraint.PropertyName + ...
+                        " was not notified by " + fcnName + ".";
                 elseif constraint.TestPassed
                     str = "Event " + constraint.EventName + ...
-                        " was triggered by " + fcnName + ".";
+                        " for property " + constraint.PropertyName + ...
+                        " was notified by " + fcnName + ".";
                 else
                     str = "The test has not been run yet.";
                 end % if
@@ -124,7 +128,7 @@ classdef NotifiesPropertyEvent < ...
 
         function tf = evaluateConstraint( constraint, fcnToCall )
 
-            % If function has already been evaluated with this function
+            % If the function has already been evaluated with this function
             % handle, don't re-evaluate.
             if ~isempty( constraint.EvaluatedFunction ) && ...
                     isequal( constraint.EvaluatedFunction, fcnToCall )
@@ -132,13 +136,13 @@ classdef NotifiesPropertyEvent < ...
                 return
             end % if
 
-            % Default state is to assume failure.
+            % Default state is to assume that the constraint is false.
             tf = false;
 
             % Add a listener to the event source for the desired property
             % event.
             listener( constraint.EventSource, constraint.PropertyName, ...
-                constraint.EventName, @onEventFired );
+                constraint.EventName, @onEventReceived );
 
             % Run the function.
             fcnToCall();
@@ -147,11 +151,11 @@ classdef NotifiesPropertyEvent < ...
             constraint.TestPassed = tf;
             constraint.EvaluatedFunction = fcnToCall;
 
-            function onEventFired( ~, ~ )
+            function onEventReceived( ~, ~ )
 
                 tf = true;
 
-            end % onEventFired
+            end % onEventReceived
 
         end % evaluateConstraint
 

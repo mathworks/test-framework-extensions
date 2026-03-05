@@ -1,5 +1,4 @@
-classdef NotifiesEvent < matlab.unittest.internal.constraints...
-        .NegatableConstraint & handle
+classdef NotifiesEvent < matlab.unittest.constraints.Constraint & handle
     %NOTIFIESEVENT Constraint to verify that an event has been notified.
 
     properties ( SetAccess = immutable )
@@ -11,6 +10,8 @@ classdef NotifiesEvent < matlab.unittest.internal.constraints...
     end % properties ( SetAccess = immutable )
 
     properties ( Access = private )
+        % Logical flag for the constraint being negated.
+        Negated(1, 1) logical = false()
         % Flag indicating whether the test has passed.
         TestPassed(1, :) logical = logical.empty( 1, 0 )
         % Function that has been evaluated.
@@ -34,80 +35,108 @@ classdef NotifiesEvent < matlab.unittest.internal.constraints...
 
         end % constructor
 
-        function tf = satisfiedBy( obj, fcnToCall )
+        function tf = satisfiedBy( constraint, fcnToCall )
 
-            tf = obj.evaluateConstraint( fcnToCall );
+            if ~constraint.Negated
+                tf = constraint.evaluateConstraint( fcnToCall );
+            else
+                tf = ~constraint.evaluateConstraint( fcnToCall );
+            end % if
 
         end % satisfiedBy
 
-        function diag = getDiagnosticFor( obj, fcn )
+        function diag = getDiagnosticFor( constraint, fcn )
 
-            obj.evaluateConstraint( fcn );
-            fcnName = func2str( fcn );
+            if ~constraint.Negated
 
-            if obj.TestPassed
-                str = "Event " + obj.EventName + " was notified by " + ...
-                    fcnName;
-            elseif ~obj.TestPassed
-                str = "Event " + obj.EventName + " was not notified " + ...
-                    "by " + fcnName;
+                constraint.evaluateConstraint( fcn );
+                fcnName = func2str( constraint.EvaluatedFunction );
+
+                if constraint.TestPassed
+                    str = "Event " + constraint.EventName + ...
+                        " was notified by " + fcnName + ".";
+                elseif ~constraint.TestPassed
+                    str = "Event " + constraint.EventName + ...
+                        " for property " + constraint.PropertyName + ...
+                        " was not notified by " + fcnName + ".";
+                else
+                    str = "The test has not been run yet";
+                end % if
+
+                diag = matlab.unittest.diagnostics.StringDiagnostic( str );
+
             else
-                str = "The test has not been run yet.";
+
+                diag = getNegativeDiagnosticFor( constraint, fcn );
+
             end % if
 
-            diag = matlab.unittest.diagnostics.StringDiagnostic( str );
-
         end % getDiagnosticFor
+
+        function constraint = not( constraint )
+
+            constraint.Negated = ~constraint.Negated;
+
+        end % not (~)
 
     end % methods
 
     methods ( Access = protected )
 
-        function diag = getNegativeDiagnosticFor( obj, fcn )
+        function diag = getNegativeDiagnosticFor( constraint, fcn )
 
-            obj.evaluateConstraint( fcn );
-            fcnName = func2str( fcn );
+            if constraint.Negated
 
-            if ~obj.TestPassed
-                str = "Event " + obj.EventName + " was not notified " + ...
-                    "by " + fcnName;
-            elseif obj.TestPassed
-                str = "Event " + obj.EventName + " was notified " + ...
-                    "by " + fcnName;
+                constraint.evaluateConstraint( fcn );
+                fcnName = func2str( constraint.EvaluatedFunction );
+
+                if ~constraint.TestPassed
+                    str = "Event " + constraint.EventName + ...
+                        " was not notified by " + fcnName + ".";
+                elseif constraint.TestPassed
+                    str = "Event " + constraint.EventName + ...
+                        " was notified by " + fcnName + ".";
+                else
+                    str = "The test has not been run yet.";
+                end % if
+
+                diag = matlab.unittest.diagnostics.StringDiagnostic( str );
+
             else
-                str = "The test has not been run yet.";
-            end % if
 
-            diag = matlab.unittest.diagnostics.StringDiagnostic( str );
+                diag = getDiagnosticFor( constraint, fcn );
+
+            end % if
 
         end % getNegativeDiagnosticFor
 
-        function tf = evaluateConstraint( obj, fcnToCall )
+        function tf = evaluateConstraint( constraint, fcnToCall )
 
             % If the function has already been evaluated with this function
             % handle, don't re-evaluate.
-            if ~isempty( obj.EvaluatedFunction ) && ...
-                    isequal( obj.EvaluatedFunction, fcnToCall )
-                tf = obj.TestPassed;
+            if ~isempty( constraint.EvaluatedFunction ) && ...
+                    isequal( constraint.EvaluatedFunction, fcnToCall )
+                tf = constraint.TestPassed;
                 return
             end % if
 
             % Default state is to assume that the constraint is false.
-            obj.TestPassed = false;
+            tf = false;
 
             % Add a listener to the event source for the desired event.
-            listener( obj.EventSource, obj.EventName, @onEventReceived );
+            listener( constraint.EventSource, constraint.EventName, ...
+                @onEventReceived );
 
             % Run the function.
             fcnToCall();
 
             % Store the function.
-            obj.EvaluatedFunction = fcnToCall;
-            tf = obj.TestPassed;
+            constraint.EvaluatedFunction = fcnToCall;
+            constraint.TestPassed = tf;
 
             function onEventReceived( ~, ~ )
 
-                obj.TestPassed = true;
+                tf = true;
 
             end % onEventReceived
 

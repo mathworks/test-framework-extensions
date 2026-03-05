@@ -1,4 +1,4 @@
-classdef tNotifiesEvent < matlab.unittest.TestCase
+classdef tNotifiesPropertyEvent < matlab.unittest.TestCase
 
     methods (Test)
 
@@ -6,11 +6,14 @@ classdef tNotifiesEvent < matlab.unittest.TestCase
 
             % Define function to call
             d = DummyEventClass();
-            fcn = @() d.notifyTestEvent();
+            fcn = @setP;
 
-            % Check that the event was notified
-            eventName = "TestEvent";
-            notifEvt = NotifiesEvent(d,eventName);
+            function setP
+                d.P = 1;
+            end
+
+            % Check that the event was notified            
+            notifEvt = NotifiesPropertyEvent(d, "P", "PostSet");
             this.verifyThat(fcn,notifEvt)
 
             % Check running it a second time doesn't cause issues
@@ -18,11 +21,16 @@ classdef tNotifiesEvent < matlab.unittest.TestCase
 
             % Check the diagnostic
             diag = notifEvt.getDiagnosticFor(fcn).DiagnosticText;
-            expt = 'Event TestEvent was notified by @()d.notifyTestEvent().';
+            expt = 'Event PostSet for property P was notified by tNotifiesPropertyEvent.tEventNotified/setP.';
             this.verifyEqual(diag,expt)
 
             % Test the same event with a different function
-            fcn2 = @() d.notifyTestEventAgain();
+            fcn2 = @setP2;
+            
+            function setP2
+                d.P = 2;
+            end
+
             this.verifyThat(fcn2,notifEvt)
 
         end
@@ -31,16 +39,19 @@ classdef tNotifiesEvent < matlab.unittest.TestCase
 
             % Define function to call
             d = DummyEventClass();
-            fcn = @() d.notifyTestEvent();
+            fcn = @setQ;
 
-            % Check that the event was not notified
-            eventName = "TestEvent2";
-            notNotifEvt = ~NotifiesEvent(d,eventName);
+            function setQ
+                d.Q = 1;
+            end
+
+            % Check that the event was not notified            
+            notNotifEvt = ~NotifiesPropertyEvent(d, "P", "PostSet");
             this.verifyThat(fcn,notNotifEvt)
 
             % Check the diagnostic
             diag = notNotifEvt.getDiagnosticFor(fcn).DiagnosticText;
-            expt = 'Event TestEvent2 was not notified by @()d.notifyTestEvent().';
+            expt = 'Event PostSet for property P was not notified by tNotifiesPropertyEvent.tEventNotNotified/setQ.';
             this.verifyEqual(diag,expt)
 
         end

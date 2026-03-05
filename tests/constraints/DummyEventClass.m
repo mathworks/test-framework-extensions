@@ -1,4 +1,9 @@
 classdef DummyEventClass < handle
+
+    properties (SetObservable)
+        P
+        Q
+    end
     
     events (NotifyAccess = private)
         TestEvent

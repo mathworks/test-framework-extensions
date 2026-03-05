@@ -11,7 +11,7 @@
 % MatchesStatistically
 % NotifiesEvent
 % NotifiesPropertyEvent
-% PassesEventData%
+% PassesEventData
 %
 % Fixtures
 %
