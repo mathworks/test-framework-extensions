@@ -5,7 +5,8 @@ classdef NotifiesPropertyEvent < ...
 
     properties ( SetAccess = immutable )
         % Event source object.
-        EventSource(1, 1) handle {isvalid} = gobjects( 1 )
+        EventSource(:, 1) handle {isvalid, mustBeScalarOrEmpty} = ...
+            gobjects( 0 )
         % Property name.
         PropertyName(1, 1) string = ""
         % Property event name.

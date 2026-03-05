@@ -1,5 +1,4 @@
-classdef PassesEventData < matlab.unittest.internal.constraints...
-        .NegatableConstraint & handle
+classdef PassesEventData < matlab.unittest.constraints.Constraint & handle
     %PASSESEVENTDATA Verify that an event passes custom event data.
 
     properties ( SetAccess = immutable )
@@ -14,6 +13,8 @@ classdef PassesEventData < matlab.unittest.internal.constraints...
     end % properties ( SetAccess = immutable )
 
     properties ( Access = private )
+        % Logical flag for the constraint being negated.
+        Negated(1, 1) logical = false()
         % Flag indicating whether the test has passed.
         TestPassed(1, :) logical = logical.empty( 1, 0 )
         % Function that has been evaluated.
@@ -39,61 +40,95 @@ classdef PassesEventData < matlab.unittest.internal.constraints...
 
         end % constructor
 
-        function tf = satisfiedBy( obj, fcnToCall )
+        function tf = satisfiedBy( constraint, fcnToCall )
 
-            tf = obj.evaluateConstraint( fcnToCall );
+            if ~constraint.Negated
+                tf = constraint.evaluateConstraint( fcnToCall );
+            else
+                tf = ~constraint.evaluateConstraint( fcnToCall );
+            end % if
 
         end % satisfiedBy
 
-        function diag = getDiagnosticFor( obj, fcn )
+        function diag = getDiagnosticFor( constraint, fcn )
 
-            diag = obj.getGenericDiagnosticFor( fcn, false );
+           if ~constraint.Negated
+
+                constraint.evaluateConstraint( fcn );
+                fcnName = func2str( constraint.EvaluatedFunction );
+
+                if constraint.TestPassed
+                    str = "The event data of type " + ...
+                        class( constraint.EventData ) + ...
+                        " for the event " + constraint.EventName + ...
+                        " was passed when the function " + fcnName + ...
+                        " was called.";
+                elseif ~constraint.TestPassed
+                    str = "The event data of type " + ...
+                        class( constraint.EventData ) + ...
+                        " for the event " + constraint.EventName + ...
+                        " was not passed when the function " + ...
+                        fcnName + " was called.";
+                else
+                    str = "The test has not been run yet";
+                end % if
+
+                diag = matlab.unittest.diagnostics.StringDiagnostic( str );
+
+            else
+
+                diag = getNegativeDiagnosticFor( constraint, fcn );
+
+            end % if
 
         end % getDiagnosticFor
+
+        function constraint = not( constraint )
+
+            constraint.Negated = ~constraint.Negated;
+
+        end % not (~)
 
     end % methods
 
     methods ( Access = protected )
 
-        function diag = getNegativeDiagnosticFor( obj, fcn )
+        function diag = getNegativeDiagnosticFor( constraint, fcn )
 
-            diag = obj.getGenericDiagnosticFor( fcn, true );
+            if constraint.Negated
 
-        end % getNegativeDiagnosticFor
+                constraint.evaluateConstraint( fcn );
+                fcnName = string( char( constraint.EvaluatedFunction ) );
 
-        function diag = getGenericDiagnosticFor( obj, fcn, isNegated )
+                if ~constraint.TestPassed
+                     str = "The event data of type " + ...
+                        class( constraint.EventData ) + ...
+                        " for the event " + constraint.EventName + ...
+                        " was not passed when the function " + ...
+                        fcnName + " was called.";
+                elseif constraint.TestPassed
+                    str = "The event data of type " + ...
+                        class( constraint.EventData ) + ...
+                        " for the event " + constraint.EventName + ...
+                        " was passed when the function " + fcnName + ...
+                        " was called.";
+                else
+                    str = "The test has not been run yet.";
+                end % if
 
-            obj.evaluateConstraint( fcn );
+                diag = matlab.unittest.diagnostics.StringDiagnostic( str );
 
-            if isNegated
-                posStr = " not ";
-                negStr = " ";
             else
-                posStr = " ";
-                negStr = " not ";
+
+                diag = getDiagnosticFor( constraint, fcn );
+
             end % if
 
-            fcnName = func2str( fcn );
+        end % getNegativeDiagnosticFor       
 
-            if obj.TestPassed
-                str = "The event data of type " + ...
-                    class( obj.EventData ) + ...
-                    " for the event " + obj.EventName + " was" + ...
-                    posStr + "passed when the function " + fcnName + ...
-                    " was called.";
-            elseif ~obj.TestPassed
-                str = "The event data of type " + ...
-                    class( obj.EventData ) + ...
-                    " for the event " + obj.EventName + " was" + ...
-                    negStr + "passed when the function " + fcnName + ...
-                    " was called.";
-            else
-                str = "The test has not been run yet.";
-            end % if
+    end % methods ( Access = protected )
 
-            diag = matlab.unittest.diagnostics.StringDiagnostic( str );
-
-        end % getGenericDiagnosticFor
+    methods ( Access = private )
 
         function tf = evaluateConstraint( obj, fcnToCall )
 
@@ -134,6 +169,6 @@ classdef PassesEventData < matlab.unittest.internal.constraints...
 
         end % evaluateConstraint
 
-    end % methods ( Access = protected )
+    end % methods ( Access = private )
 
 end % classdef
