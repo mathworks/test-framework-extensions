@@ -41,7 +41,7 @@ classdef tMatchesStatistically < matlab.unittest.TestCase
             diag = constr.getDiagnosticFor(A);
             
             expectedText = '<a href="matlab:helpPopup matlab.unittest.constraints.HasLength" style="font-weight:bold">HasLength</a> failed.';
-            testCase.verifyThat(diag.DiagnosticText, StartsWithSubstring(expectedText));
+            testCase.verifyThat(diag.DiagnosticText, matlab.unittest.constraints.StartsWithSubstring(expectedText));
         end
         
     end
