@@ -1,1 +1,0 @@
-runtests(currentProject().RootFolder,"ReportCoverageFor","tbx")
