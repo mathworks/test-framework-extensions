@@ -1,4 +1,8 @@
 classdef SuppressParpoolAutocreateFixture < matlab.unittest.fixtures.Fixture
+
+    properties
+        AutoCreate(1, 1) logical = true
+    end
     
     methods
         
@@ -7,11 +11,18 @@ classdef SuppressParpoolAutocreateFixture < matlab.unittest.fixtures.Fixture
             delete(gcp("nocreate"))
             
             ps = parallel.Settings();
-            if ps.Pool.AutoCreate
-                ps.Pool.AutoCreate = false;
-                fixture.addTeardown(@(tf) set(ps.Pool,'AutoCreate',tf),true)
+            fixture.AutoCreate = ps.Pool.AutoCreate;
+            if ps.Pool.AutoCreate                
+                ps.Pool.AutoCreate = false;                
             end
             
+        end
+
+        function teardown(fixture)
+
+            ps = parallel.Settings();
+            ps.Pool.AutoCreate = fixture.AutoCreate;
+
         end
         
     end
