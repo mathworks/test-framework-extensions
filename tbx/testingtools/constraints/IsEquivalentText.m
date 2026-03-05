@@ -86,4 +86,4 @@ classdef IsEquivalentText < matlab.unittest.constraints.BooleanConstraint
         
     end % methods ( Access = private )
     
-end % class definition
+end % classdef

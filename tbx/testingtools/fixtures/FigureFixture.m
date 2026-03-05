@@ -1,45 +1,55 @@
 classdef FigureFixture < matlab.unittest.fixtures.Fixture
-    
-    properties (SetAccess = private)
-        FigureHandle
-    end
-    
-    properties (Access = private)
-        FigureCreationArgs
-    end
-    
+    %FIGUREFIXTURE Custom test fixture.
+
+    properties ( SetAccess = private )
+        % Test figure.
+        Figure(:, 1) matlab.ui.Figure {mustBeScalarOrEmpty}
+    end % properties ( SetAccess = private )
+
+    properties ( Access = private )
+        % Figure creation arguments.
+        FigureArguments(1, 1) struct
+    end % properties ( Access = private )
+
     methods
-        
-        function fixture = FigureFixture(varargin)
-            
-            fixture.FigureCreationArgs = varargin;
-            
-        end
-        
-        function setup(fixture)
-            
-            fixture.FigureHandle = figure(fixture.FigureCreationArgs{:});
-            
-        end
-        
-        function teardown(fixture)
-            
-            if isvalid(fixture.FigureHandle)
-                delete(fixture.FigureHandle)
-            end
-                
-        end
-        
-    end
-    
-    methods (Access = protected)
-        
-        function tf = isCompatible(this,otherfx)
-            
-            tf = isequal(this.FigureCreationArgs,otherfx.FigureCreationArgs);
-            
-        end
-        
-    end
-    
-end
+
+        function fixture = FigureFixture( namedArgs )
+            %FIGUREFIXTURE Construct the FigureFixture, given optional
+            %figure name-value pair arguments.
+
+            arguments ( Input )
+                namedArgs.?matlab.ui.Figure
+            end % arguments ( Input )
+
+            % Record the figure creation arguments.
+            fixture.FigureArguments = namedArgs;
+
+            % Add descriptions.
+            fixture.SetupDescription = "Create a new uifigure.";
+            fixture.TeardownDescription = "Delete the uifigure.";
+
+        end % constructor
+
+        function setup( fixture )
+
+            % Create a new figure.
+            fixture.Figure = uifigure( fixture.FigureArguments );
+
+            % Define the teardown action.
+            fixture.addTeardown( @() delete( fixture.Figure ) )
+
+        end % setup
+
+    end % methods
+
+    methods ( Access = protected )
+
+        function tf = isCompatible( fixture1, fixture2 )
+
+            tf = fixture1.Figure == fixture2.Figure;
+
+        end % isCompatible
+
+    end % methods ( Access = protected )
+
+end % classdef

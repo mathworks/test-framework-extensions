@@ -7,13 +7,13 @@ classdef DummyEventClass < handle
     
     methods
         
-        function triggerTestEvent(this)
+        function notifyTestEvent(this)
             
             this.notify("TestEvent")
             
         end
         
-        function triggerTestEventAgain(this)
+        function notifyTestEventAgain(this)
             
             this.notify("TestEvent")
             

@@ -6,10 +6,10 @@ classdef tFigureFixture < matlab.unittest.TestCase
             
             fx = FigureFixture();
             this.applyFixture(fx);
-            this.verifyTrue(isgraphics(fx.FigureHandle))
+            this.verifyTrue(isscalar(fx.Figure) && isa(fx.Figure, "matlab.ui.Figure") && isvalid(fx.Figure))
             
             fx.teardown()
-            this.verifyFalse(isgraphics(fx.FigureHandle))
+            this.verifyFalse(isscalar(fx.Figure) && isa(fx.Figure, "matlab.ui.Figure") && ~isvalid(fx.Figure))
             
         end
         
@@ -18,7 +18,7 @@ classdef tFigureFixture < matlab.unittest.TestCase
             fx = FigureFixture("Color","blue");
             this.applyFixture(fx);
             
-            this.verifyEqual(fx.FigureHandle.Color,[0 0 1])
+            this.verifyEqual(fx.Figure.Color,[0 0 1])
             
         end
         

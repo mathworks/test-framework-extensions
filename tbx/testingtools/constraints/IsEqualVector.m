@@ -17,8 +17,8 @@ classdef IsEqualVector < matlab.unittest.constraints.BooleanConstraint
             
             % Check and assign the constructor input arguments.
             arguments
-                % The test value (a double vector).
-                vector(:, 1) double = NaN
+                % The test value (a vector).
+                vector(:, 1) = NaN
                 % Absolute tolerance used for comparison with the actual 
                 % value.
                 opts.AbsTol(1, 1) ...
@@ -92,6 +92,11 @@ classdef IsEqualVector < matlab.unittest.constraints.BooleanConstraint
         
         function tf = vectorMatchesExpected( constraint, actual )
             
+            % Is the provided value a vector?
+            sz = size( actual );
+            assert( nnz( sz == 1 ) >= length( sz ) - 1, ...
+                "The provided value is not a vector." )
+            
             % Create an IsEqualTo constraint with the given tolerance.
             import matlab.unittest.constraints.*
             iseqto = IsEqualTo( constraint.VectorWithExpectedValue, ...
@@ -106,4 +111,4 @@ classdef IsEqualVector < matlab.unittest.constraints.BooleanConstraint
         
     end % methods ( Access = private )
     
-end % class definition
+end % classdef
