@@ -9,6 +9,9 @@ on:
     branches: [master]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 env:
       DOCMAKER_GITHUB_TOKEN: ${{ secrets.DOCMAKER_GITHUB_TOKEN }}
 
@@ -87,6 +90,3 @@ jobs:
         draft: false
         make_latest: true
         files: releases/MATLABTestingTools.mltbx
-      env:
-
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
