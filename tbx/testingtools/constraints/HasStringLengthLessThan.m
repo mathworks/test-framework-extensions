@@ -1,6 +1,6 @@
 classdef HasStringLengthLessThan < matlab.unittest.constraints.BooleanConstraint
     
-    properties (SetAccess = immutable)
+    properties (SetAccess = private)
         MaximumStringLength (1,1) double = namelengthmax()
     end
     

@@ -1,6 +1,6 @@
 classdef DatetimeTolerance < matlab.unittest.constraints.Tolerance
     
-    properties
+    properties ( SetAccess = private )
         Tolerance (1,1) duration = seconds(eps)
         IgnoreNaT (1,1) logical = false
     end

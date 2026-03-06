@@ -3,7 +3,7 @@ classdef MatchesStatistically < matlab.unittest.constraints.Constraint
     % percentage of elements in a given vector match an expected vector, up
     % to an absolute or relative tolerance.
     
-    properties (SetAccess = immutable)
+    properties (SetAccess = private)
         Expected (1,:) double
         AbsTol (1,1) matlab.unittest.constraints.AbsoluteTolerance = 0
         RelTol (1,1) matlab.unittest.constraints.RelativeTolerance = 0
