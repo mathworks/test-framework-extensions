@@ -30,7 +30,7 @@ A custom MATLAB unit test constraint to verify that a specific property event (e
 **Example:**
 
 ```matlab
-c = NotifiesPropertyEvent(myObj, "MyProp", "PostSet");
+c = NotifiesPropertyEvent(myObj, "MyProp", "PostSet"); 
 ```
 
 ## Usage Example
@@ -70,7 +70,7 @@ classdef tNotifiesPropertyEvent < matlab.unittest.TestCase
 
     end
 
-end
+end 
 ```
 
 ## Constraint Behavior

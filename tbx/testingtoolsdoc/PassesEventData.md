@@ -31,7 +31,7 @@ A custom MATLAB unit test constraint to verify that a specific event passes cust
 
 ```matlab
 evtData = MyCustomEventData("SomeValue");
-c = PassesEventData(myObj, "MyEvent", evtData);
+c = PassesEventData(myObj, "MyEvent", evtData); 
 ```
 
 ## Usage Example
@@ -95,7 +95,7 @@ classdef tPassesEventData < matlab.unittest.TestCase
 
     end
 
-end
+end 
 ```
 
 ## Constraint Behavior

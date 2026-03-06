@@ -32,7 +32,7 @@ A custom MATLAB unit test constraint for asserting that **at least a given perce
 ```matlab
 MatchesStatistically([1 2 3])
 MatchesStatistically([1 2 3], "AbsTol", 1e-3)
-MatchesStatistically([1 2 3], "RelTol", 1e-2, "Percentage", 90)
+MatchesStatistically([1 2 3], "RelTol", 1e-2, "Percentage", 90) 
 ```
 
 ## Example Usage
@@ -65,7 +65,7 @@ classdef tMatchesStatistically < matlab.unittest.TestCase
 
     end
 
-end
+end 
 ```
 
 ## Constraint Behavior

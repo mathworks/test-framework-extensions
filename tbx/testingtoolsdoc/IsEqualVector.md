@@ -29,7 +29,7 @@ A custom MATLAB unit test constraint for asserting that a vector is equal to an 
 c = IsEqualVector([1 2 3]); % Must match [1 2 3] exactly, any orientation
 c = IsEqualVector([1 2 3], "AbsTol", 1e-5);
 c = IsEqualVector([1 2 3], "RelTol", 1e-3);
-c = IsEqualVector([1 2 3], "AbsTol", 1e-5, "RelTol", 1e-3);
+c = IsEqualVector([1 2 3], "AbsTol", 1e-5, "RelTol", 1e-3); 
 ```
 
 ## Example
@@ -61,7 +61,7 @@ classdef tIsEqualVector < matlab.unittest.TestCase
 
     end
 
-end
+end 
 ```
 
 ## Constraint Behavior

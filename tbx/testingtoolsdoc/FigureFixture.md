@@ -21,7 +21,7 @@ A custom MATLAB unit test fixture for managing the lifecycle of a `uifigure` dur
 - **Input**:  Name-value pairs corresponding to `matlab.ui.Figure` properties.
 
 ```matlab
-fixture = FigureFixture("Name", "Test Figure", "Position", [100 100 400 300]);
+fixture = FigureFixture("Name", "Test Figure", "Position", [100 100 400 300]); 
 ```
 
 ## Example
@@ -45,7 +45,7 @@ classdef MyUITest < TestCase
 
     end
 
-end
+end 
 ```
 ## Fixture Lifecycle
 

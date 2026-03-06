@@ -21,7 +21,7 @@ A custom MATLAB unit test fixture for managing the lifecycle of a Simulink model
   - `modelName` (string): Name of the Simulink model to load.
 
 ```matlab
-fixture = SimulinkModelFixture("my_model");
+fixture = SimulinkModelFixture("my_model"); 
 ```
 
 ## Example
@@ -44,7 +44,7 @@ classdef MySimulinkTest < matlab.unittest.TestCase
 
     end
 
-end
+end 
 ```
 
 ## Fixture Lifecycle

@@ -22,7 +22,7 @@ A custom MATLAB unit test constraint for asserting that two text arrays (`string
 ```matlab
 c = IsEquivalentText(["foo", "bar"]); % Must match ["foo", "bar"], any orientation
 c = IsEquivalentText({'foo', 'bar'}); % Cellstr also supported
-c = IsEquivalentText("hello");         % Single string
+c = IsEquivalentText("hello");         % Single string 
 ```
 
 ## Example
@@ -53,7 +53,7 @@ classdef tIsEquivalentText < matlab.unittest.TestCase
 
     end
 
-end
+end 
 ```
 
 ## Constraint Behavior

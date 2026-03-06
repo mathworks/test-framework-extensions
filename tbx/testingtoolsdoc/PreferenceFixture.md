@@ -35,7 +35,7 @@ fixture = PreferenceFixture("MyToolbox");
 fixture = PreferenceFixture("MyToolbox", "ShowTips");
 
 % Override a specific preference and set it to a value
-fixture = PreferenceFixture("MyToolbox", "ShowTips", false);
+fixture = PreferenceFixture("MyToolbox", "ShowTips", false); 
 ```
 
 ## Example
@@ -58,7 +58,7 @@ classdef MyPreferenceTest < matlab.unittest.TestCase
 
     end
 
-end
+end 
 ```
 
 ## Fixture Lifecycle

@@ -22,7 +22,7 @@ A custom MATLAB unit test constraint for asserting that all strings in an array 
 
 ```matlab
 c = HasStringLengthLessThan(10); % All strings must have length < 10
-c = HasStringLengthLessThan();   % Uses MATLAB's default name length limit
+c = HasStringLengthLessThan();   % Uses MATLAB's default name length limit 
 ```
 
 ## Example
@@ -48,7 +48,7 @@ classdef tStringLength < matlab.unittest.TestCase
 
     end
 
-end
+end 
 ```
 
 ## Constraint Behavior

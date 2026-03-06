@@ -19,7 +19,7 @@ A custom MATLAB unit test fixture for suppressing automatic parallel pool (`parp
 - **Description**: Constructs the fixture and prepares to suppress automatic parallel pool creation.
 
 ```matlab
-fixture = SuppressParpoolAutocreateFixture();
+fixture = SuppressParpoolAutocreateFixture(); 
 ```
 
 ## Example
@@ -43,7 +43,7 @@ classdef MyParallelTest < matlab.unittest.TestCase
 
     end
 
-end
+end 
 ```
 
 ## Fixture Lifecycle

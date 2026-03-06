@@ -25,7 +25,7 @@ A custom MATLAB unit test tolerance constraint for comparing `datetime` or `dura
 
 ```matlab
 tol = DatetimeTolerance(seconds(1)); % 1-second tolerance
-tol = DatetimeTolerance(minutes(5), "IgnoringNaT", true); % 5-minute tolerance, ignore NaT pairs
+tol = DatetimeTolerance(minutes(5), "IgnoringNaT", true); % 5-minute tolerance, ignore NaT pairs 
 ```
 
 ## Example
@@ -53,7 +53,7 @@ classdef MyDatetimeTest < matlab.unittest.TestCase
 
     end
 
-end
+end 
 ```
 
 ## Constraint Behavior

@@ -22,7 +22,7 @@ A custom MATLAB unit test constraint for asserting that two file or folder paths
 
 ```matlab
 c = IsSamePathAs("C:\Users\foo\Documents"); % Windows-style path
-c = IsSamePathAs("/home/foo/Documents");    % UNIX-style path
+c = IsSamePathAs("/home/foo/Documents");    % UNIX-style path 
 ```
 
 ## Example
@@ -57,7 +57,7 @@ classdef tIsSamePathAs < matlab.unittest.TestCase
 
     end
 
-end
+end 
 ```
 
 ## Constraint Behavior

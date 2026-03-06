@@ -28,7 +28,7 @@ A custom MATLAB unit test constraint to verify that a specified event has been n
 **Example:**
 
 ```matlab
-c = NotifiesEvent(myObj, "MyEvent");
+c = NotifiesEvent(myObj, "MyEvent"); 
 ```
 
 ## Usage Example
@@ -72,7 +72,7 @@ classdef tNotifiesEvent < matlab.unittest.TestCase
 
     end
 
-end
+end 
 ```
 ## Constraint Behavior
 
