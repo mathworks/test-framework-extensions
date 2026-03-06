@@ -70,8 +70,14 @@ classdef IsEquivalentText < matlab.unittest.constraints.BooleanConstraint
         
         function tf = arrayMatchesExpected( constraint, actual )
             
-            % Convert the actual value to a column vector of strings.
-            actual = convertCharsToStrings( actual );
+            % Convert the actual value to a column vector of strings. Deal
+            % with char matrices separately.
+            if ischar( actual ) && ~isrow( actual )
+                actual = string( actual );
+            else
+                actual = convertCharsToStrings( actual );
+            end % if
+
             actual = actual(:);
             
             % Create an IsEqualTo constraint.
