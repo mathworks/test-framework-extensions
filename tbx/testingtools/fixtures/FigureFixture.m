@@ -4,12 +4,9 @@ classdef FigureFixture < matlab.unittest.fixtures.Fixture
     properties ( SetAccess = private )
         % Test figure.
         Figure(:, 1) matlab.ui.Figure {mustBeScalarOrEmpty}
-    end % properties ( SetAccess = private )
-
-    properties ( Access = private )
         % Figure creation arguments.
         FigureArguments(1, 1) struct
-    end % properties ( Access = private )
+    end % properties ( SetAccess = private )
 
     methods
 

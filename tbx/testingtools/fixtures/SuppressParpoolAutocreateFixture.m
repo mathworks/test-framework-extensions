@@ -1,6 +1,6 @@
 classdef SuppressParpoolAutocreateFixture < matlab.unittest.fixtures.Fixture
 
-    properties
+    properties ( SetAccess = private )
         AutoCreate(1, 1) logical = true
     end
     

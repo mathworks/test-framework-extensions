@@ -1,6 +1,6 @@
 classdef SimulinkModelFixture < matlab.unittest.fixtures.Fixture
 
-    properties (SetAccess = immutable)
+    properties (SetAccess = private)
         ModelName (1,1) string
     end
 
