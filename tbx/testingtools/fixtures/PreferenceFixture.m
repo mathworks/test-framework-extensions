@@ -2,6 +2,8 @@ classdef PreferenceFixture < matlab.unittest.fixtures.Fixture
     % PreferenceFixture - override a preference or preference group, and
     % restore the original value on teardown. If the preference didn't
     % exist initially, the preference will be removed.
+
+    % Copyright 2026 The MathWorks, Inc.
     
     properties (SetAccess = private)
         Group (1,1) string

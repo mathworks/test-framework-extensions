@@ -1,6 +1,8 @@
 classdef PassesEventData < matlab.unittest.constraints.Constraint & handle
     %PASSESEVENTDATA Verify that an event passes custom event data.
 
+    % Copyright 2026 The MathWorks, Inc.
+
     properties ( SetAccess = immutable )
         % Handle to the source of the event.
         EventSource(:, 1) handle {isvalid, mustBeScalarOrEmpty} = ...

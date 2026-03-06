@@ -1,4 +1,6 @@
 classdef DatetimeTolerance < matlab.unittest.constraints.Tolerance
+
+    % Copyright 2026 The MathWorks, Inc.
     
     properties ( SetAccess = private )
         Tolerance (1,1) duration = seconds(eps)

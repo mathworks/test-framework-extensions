@@ -1,4 +1,6 @@
 classdef IsSamePathAs < matlab.unittest.constraints.BooleanConstraint
+
+    % Copyright 2026 The MathWorks, Inc.
     
     properties (SetAccess=immutable)
         ExpectedPath (1,1) string

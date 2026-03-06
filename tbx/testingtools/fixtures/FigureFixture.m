@@ -1,6 +1,8 @@
 classdef FigureFixture < matlab.unittest.fixtures.Fixture
     %FIGUREFIXTURE Custom test fixture.
 
+    % Copyright 2026 The MathWorks, Inc.
+
     properties ( SetAccess = private )
         % Test figure.
         Figure(:, 1) matlab.ui.Figure {mustBeScalarOrEmpty}

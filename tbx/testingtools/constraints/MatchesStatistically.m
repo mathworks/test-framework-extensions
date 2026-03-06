@@ -2,6 +2,8 @@ classdef MatchesStatistically < matlab.unittest.constraints.Constraint
     % MATCHESSTATISTICALLY is a constraint that determines whether a given
     % percentage of elements in a given vector match an expected vector, up
     % to an absolute or relative tolerance.
+
+    % Copyright 2026 The MathWorks, Inc.
     
     properties (SetAccess = private)
         Expected (1,:) double

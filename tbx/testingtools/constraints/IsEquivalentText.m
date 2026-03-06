@@ -3,6 +3,8 @@ classdef IsEquivalentText < matlab.unittest.constraints.BooleanConstraint
     %(string or cellstr) is equal to an expected text array. Size and/or
     %orientation is also ignored: the two arrays are compared as column
     %vectors.
+
+    % Copyright 2026 The MathWorks, Inc.
     
     properties ( SetAccess = private )
         % Test array with the expected value.

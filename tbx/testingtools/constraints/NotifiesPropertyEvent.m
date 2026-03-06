@@ -3,6 +3,8 @@ classdef NotifiesPropertyEvent < ...
     %NOTIFIESPROPERTYEVENT Constraint to verify that a property event has 
     %been notified.
 
+    % Copyright 2026 The MathWorks, Inc.
+
     properties ( SetAccess = immutable )
         % Event source object.
         EventSource(:, 1) handle {isvalid, mustBeScalarOrEmpty} = ...

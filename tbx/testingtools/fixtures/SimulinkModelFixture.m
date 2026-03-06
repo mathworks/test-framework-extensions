@@ -1,5 +1,7 @@
 classdef SimulinkModelFixture < matlab.unittest.fixtures.Fixture
 
+    % Copyright 2026 The MathWorks, Inc.
+
     properties (SetAccess = private)
         ModelName (1,1) string
     end

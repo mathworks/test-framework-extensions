@@ -1,6 +1,8 @@
 classdef IsEqualVector < matlab.unittest.constraints.BooleanConstraint
     %ISEQUALVECTOR Boolean constraint that determines if a given vector is
     %equal to an expected vector, up to orientation.
+
+    % Copyright 2026 The MathWorks, Inc.
     
     properties ( SetAccess = private )
         % Test vector with the expected value.

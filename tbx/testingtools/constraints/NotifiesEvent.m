@@ -1,6 +1,8 @@
 classdef NotifiesEvent < matlab.unittest.constraints.Constraint & handle
     %NOTIFIESEVENT Constraint to verify that an event has been notified.
 
+    % Copyright 2026 The MathWorks, Inc.
+
     properties ( SetAccess = immutable )
         % Handle to the source of the event.
         EventSource(:, 1) handle {isvalid, mustBeScalarOrEmpty} = ...
