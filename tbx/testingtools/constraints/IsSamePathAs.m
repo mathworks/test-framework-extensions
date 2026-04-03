@@ -15,17 +15,17 @@ classdef IsSamePathAs < matlab.unittest.constraints.BooleanConstraint
         end
         
         function tf = satisfiedBy(this,actual)
-            
-            actual = fullfile(actual," ");
-            expected = fullfile(this.ExpectedPath," ");
-            
+
+            actual = normalizePath(actual);
+            expected = normalizePath(this.ExpectedPath);
+
             % Windows is case insensitive, other platforms are not
             if ispc
                 tf = strcmpi(actual,expected);
             else
                 tf = strcmp(actual,expected);
             end
-            
+
         end
         
         function s = getDiagnosticFor(this,actual)
@@ -57,5 +57,14 @@ classdef IsSamePathAs < matlab.unittest.constraints.BooleanConstraint
         end
         
     end
-    
+
+end
+
+function p = normalizePath(p)
+% Normalize path separators and strip trailing separators
+
+p = string(p);
+p = replace(p, "\", "/");
+p = strip(p, "right", "/");
+
 end

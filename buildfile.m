@@ -3,8 +3,10 @@ function plan = buildfile()
 
 % Copyright 2026 The MathWorks, Inc.
 
-% Create a plan from task functions
-plan = buildplan( localfunctions() );
+import matlab.buildtool.*
+import matlab.buildtool.tasks.*
+
+plan = buildplan;
 
 % Folders of interest
 prj = plan.RootFolder;
@@ -14,26 +16,41 @@ doc = fullfile( tbx, tbxname() + "doc" );
 test = fullfile( prj, "tests" );
 
 % Clean task
-plan( "clean" ) = matlab.buildtool.tasks.CleanTask;
+plan("clean") = CleanTask;
 
-% Check task
-plan( "check" ).Inputs = api;
+% Check task group
+plan("check:code") = CodeIssuesTask( prj, ...
+    Configuration="factory", ...
+    IncludeSubfolders=true, ...
+    WarningThreshold=0 );
+
+plan("check:project") = Task( ...
+    Description="Run MATLAB project checks", ...
+    Actions=@checkProject, ...
+    Inputs=api );
 
 % Test task
-plan( "test" ) = matlab.buildtool.tasks.TestTask( test, ...
-    "SourceFiles", tbx, "Strict", true );
-plan( "test" ).Inputs = [api test];
-plan( "test" ).Dependencies = "check";
+plan("test") = TestTask( test, ...
+    SourceFiles=tbx, ...
+    Strict=true, ...
+    Dependencies="check" );
 
 % Documentation task
-plan( "doc" ).Inputs = doc;
-plan( "doc" ).Outputs = [ ...
-    fullfile( doc, "**", "*.html" ), fullfile( doc, "*.xml" ), ...
-    fullfile( doc, "resources" ), fullfile( doc, "helpsearch-v*" )];
+plan("doc") = Task( ...
+    Description="Generate documentation", ...
+    Actions=@buildDoc, ...
+    Inputs=doc, ...
+    Outputs=[ ...
+        fullfile( doc, "**", "*.html" ), fullfile( doc, "*.xml" ), ...
+        fullfile( doc, "resources" ), fullfile( doc, "helpsearch-v*" )] );
 
 % Package task
-plan( "package" ).Inputs = tbx;
-plan( "package" ).Dependencies = ["test", "doc"];
+plan("package") = Task( ...
+    Description="Package toolbox", ...
+    Actions=@packageToolbox, ...
+    Inputs=tbx, ...
+    Outputs="releases/*.mltbx", ...
+    Dependencies=["test" "doc"] );
 
 % Default task
 plan.DefaultTasks = "package";
@@ -47,20 +64,11 @@ n = "testingtools";
 
 end % tbxname
 
-function checkTask( c )
-% Identify code and project issues
+function checkProject(~)
+% Run MATLAB project checks
 
-% Check code
-t = matlab.buildtool.tasks.CodeIssuesTask( c.Plan.RootFolder, ...
-    "Configuration", "factory", ...
-    "IncludeSubfolders", true, ...
-    "WarningThreshold", 0 );
-t.analyze( c )
-fprintf( 1, "** Code checks passed\n" )
-
-% Check project
 p = currentProject();
-p.updateDependencies()
+p.updateDependencies();
 t = table( p.runChecks() );
 ok = t.Passed;
 if any( ~ok )
@@ -70,37 +78,39 @@ else
     fprintf( 1, "** Project checks passed\n" )
 end
 
-end % checkTask
+end % checkProject
 
-function docTask( c )
+function buildDoc(context)
 % Generate documentation
 
 % Documentation folder
-doc = c.Task.Inputs.Path;
+doc = context.Task.Inputs.paths;
 
 % Convert Markdown to HTML
 md = fullfile( doc, "**", "*.md" );
-html = docconvert( md, "Theme", "light" );
+html = docconvert( md, Theme="light" );
 fprintf( 1, "** Converted Markdown doc to HTML\n" )
 
 % Run code and insert output
-docrun( html, "Theme", "light", "FigureSize", [600 400] )
+docrun( html, Theme="light", FigureSize=[600 400] )
 fprintf( 1, "** Inserted MATLAB output into doc\n" )
 
 % Index documentation
 docindex( doc )
 fprintf( 1, "** Indexed doc\n" )
 
-end % docTask
+end % buildDoc
 
-function packageTask( c )
+function packageToolbox(context)
 % Package toolbox
 
+n = tbxname();
+
 % Load and tweak metadata
-s = jsondecode( fileread( tbxname() + ".json" ) );
-v = ver( tbxname() ); % from Contents.m
+s = jsondecode( fileread( n + ".json" ) );
+v = ver( n ); % from Contents.m
 assert( isscalar( v ), "build:package", ...
-    "Found %d instances of %s on the MATLAB path.", numel( v ), tbxname() )
+    "Found %d instances of %s on the MATLAB path.", numel( v ), n )
 s.ToolboxName = v.Name;
 s.ToolboxVersion = v.Version;
 
@@ -139,7 +149,7 @@ matlab.addons.toolbox.packageToolbox( o )
 fprintf( 1, "[+] %s\n", o.OutputFile );
 
 % Add license
-lic = fileread( fullfile( c.Plan.RootFolder, "LICENSE.txt" ) );
+lic = fileread( fullfile( context.Plan.RootFolder, "LICENSE.txt" ) );
 mlAddonSetLicense( char( o.OutputFile ), struct( "type", 'BSD', "text", lic ) );
 
-end % packageTask
+end % packageToolbox
