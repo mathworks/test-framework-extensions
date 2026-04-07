@@ -1,12 +1,12 @@
-name: MATLAB Testing Tools Actions
+name: Test Framework Extensions CI
 
 on:
   push:
-    branches: [master]
+    branches: [main]
     tags:
       - 'v*'
   pull_request:
-    branches: [master]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -84,9 +84,9 @@ jobs:
     - name: Release toolbox
       uses: softprops/action-gh-release@v2
       with:
-        name: MATLAB Testing Tools ${{ env.VERSION }}
+        name: Test Framework Extensions ${{ env.VERSION }}
         tag_name: v${{ env.VERSION }}
         body: ${{ steps.extract_notes.outputs.notes }}
         draft: false
         make_latest: true
-        files: releases/MATLABTestingTools.mltbx
+        files: releases/TestFrameworkExtensions.mltbx

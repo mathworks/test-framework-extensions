@@ -1,5 +1,5 @@
 function plan = buildfile()
-%buildfile  Testing Tools buildfile
+%buildfile Test Framework Extensions buildfile
 
 % Copyright 2026 The MathWorks, Inc.
 
@@ -60,7 +60,7 @@ end % buildfile
 function n = tbxname()
 %tbxname  Toolbox name
 
-n = "testingtools";
+n = "testframeworkextensions";
 
 end % tbxname
 

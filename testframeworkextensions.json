@@ -1,11 +1,11 @@
 {
     "Identifier":"609722db-8fd7-4bbd-b440-c413f25e08c0",
     "Summary":"Custom constraints and fixtures for writing MATLAB unit tests",
-    "Description":"Testing tools provides a number of utilities (custom constraints and fixtures) to aid the testing of MATLAB code.",
+    "Description":"Test Framework Extensions provides a number of utilities (custom constraints and fixtures) to aid the testing of MATLAB code.",
     "AuthorCompany":"MathWorks",
     "AuthorName":"Tim Johns, Ken Deeley",
     "AuthorEmail":"timjohns@mathworks.com; kdeeley@mathworks.com",
     "ToolboxFolder":"./tbx",
-    "ToolboxMatlabPath": ["./tbx/testingtools", "./tbx/testingtoolsdoc"],    
+    "ToolboxMatlabPath": ["./tbx/testframeworkextensions", "./tbx/testframeworkextensionsdoc"],
     "MinimumMatlabRelease":"R2023b"
 }

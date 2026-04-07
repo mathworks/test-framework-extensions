@@ -1,8 +1,8 @@
-# MATLAB Testing Tools
+# Test Framework Extensions Toolbox
 
-[![Open in MATLAB Online](readme/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=mathworks/matlab-testing-tools&project=TestingTools.prj)
+[![Open in MATLAB Online](readme/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=mathworks/test-framework-extensions&project=TestFrameworkExtensions.prj)
 
-The MATLAB Testing Tools toolbox provides a number of utilities (custom [constraints](https://www.mathworks.com/help/matlab/ref/matlab.unittest.constraints.constraint-class.html) and [fixtures](https://www.mathworks.com/help/matlab/ref/matlab.unittest.fixtures.fixture-class.html)) to aid the testing of MATLAB code.
+The Test Framework Extensions toolbox provides a number of utilities (custom [constraints](https://www.mathworks.com/help/matlab/ref/matlab.unittest.constraints.constraint-class.html) and [fixtures](https://www.mathworks.com/help/matlab/ref/matlab.unittest.fixtures.fixture-class.html)) to aid the testing of MATLAB code.
 
 ### Constraints
 * `DatetimeTolerance` - allow non-exact matching of datetimes and durations.
@@ -26,14 +26,14 @@ The documentation provides examples of how to use these constraints and fixtures
 See also the [database testing framework](https://www.mathworks.com/matlabcentral/fileexchange/77101-database-testing-framework).
 
 ## Installation and Getting Started
-1. Testing Tools is provided as a [MATLAB Toolbox](https://www.mathworks.com/help/matlab/creating-help.html). Download the toolbox file (`MATLABTestingTools.mltbx`).
-2. Double-click on the file `TestingTools.mltbx` to install it.
+1. Test Framework Extensions is provided as a [MATLAB Toolbox](https://www.mathworks.com/help/matlab/creating-help.html). Download the toolbox file (`TestFrameworkExtensions.mltbx`).
+2. Double-click on the file `TestFrameworkExtensions.mltbx` to install it.
 3. Complete the installation process.
-4. Verify the toolbox installation by entering `>> ver testingtools` at the MATLAB command line.
+4. Verify the toolbox installation by entering `>> ver testframeworkextensions` at the MATLAB command line.
 
 ### [MathWorks](https://www.mathworks.com) Product Requirements
 
-MATLAB Testing Tools is compatible with R2023b and later versions.
+Test Framework Extensions is compatible with R2023b and later versions.
 
 - [MATLAB&reg;](https://www.mathworks.com/products/matlab.html)
 - The `SimulinkModelFixture` requires [Simulink&reg;](https://www.mathworks.com/products/simulink.html).
