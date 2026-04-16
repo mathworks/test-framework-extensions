@@ -2,7 +2,7 @@
 
 [![Open in MATLAB Online](readme/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=mathworks/test-framework-extensions&project=TestFrameworkExtensions.prj)
 
-The Test Framework Extensions toolbox provides a number of utilities (custom [constraints](https://www.mathworks.com/help/matlab/ref/matlab.unittest.constraints.constraint-class.html) and [fixtures](https://www.mathworks.com/help/matlab/ref/matlab.unittest.fixtures.fixture-class.html)) to aid the testing of MATLAB code.
+The Test Framework Extensions toolbox provides a number of custom [constraints](https://www.mathworks.com/help/matlab/ref/matlab.unittest.constraints.constraint-class.html) and [fixtures](https://www.mathworks.com/help/matlab/ref/matlab.unittest.fixtures.fixture-class.html) to aid the testing of MATLAB code.
 
 ### Constraints
 * `DatetimeTolerance` - allow non-exact matching of datetimes and durations.
