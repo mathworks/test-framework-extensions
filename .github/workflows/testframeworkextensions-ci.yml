@@ -32,11 +32,7 @@ jobs:
         run: |
           sudo apt-get install -y xvfb
           Xvfb :99 &
-          echo "DISPLAY=:99" >> $GITHUB_ENV
-
-      - name: Download MATLAB DocMaker Toolbox
-        run: |
-          wget -O MATLAB_DocMaker.mltbx https://github.com/mathworks/docmaker/releases/latest/download/MATLAB_DocMaker.mltbx
+          echo "DISPLAY=:99" >> $GITHUB_ENV      
 
       - name: Set up MATLAB on the runner
         uses: matlab-actions/setup-matlab@v2
@@ -45,13 +41,7 @@ jobs:
             MATLAB
             Simulink
             Parallel_Computing_Toolbox
-          release: ${{ matrix.matlab-version }}
-
-      - name: Install Toolbox
-        uses: matlab-actions/run-command@v2
-        with:
-          command: |
-            matlab.addons.install('MATLAB_DocMaker.mltbx');
+          release: ${{ matrix.matlab-version }}    
 
       - name: Run the toolbox tests
         uses: matlab-actions/run-tests@v2
@@ -59,10 +49,13 @@ jobs:
   package-and-release-toolbox:
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
-
     steps:
       - name: Check out the repository
         uses: actions/checkout@v4
+
+      - name: Download MATLAB DocMaker Toolbox
+        run: |
+          wget -O MATLAB_DocMaker.mltbx https://github.com/mathworks/docmaker/releases/latest/download/MATLAB_DocMaker.mltbx
 
       - name: Extract version from tag
         shell: bash
@@ -86,6 +79,12 @@ jobs:
         with:
           products: MATLAB
           release: R2025b
+
+      - name: Install DocMaker
+        uses: matlab-actions/run-command@v2
+        with:
+          command: |
+            matlab.addons.install("MATLAB_DocMaker.mltbx");
 
       - name: Package toolbox
         uses: matlab-actions/run-build@v2
