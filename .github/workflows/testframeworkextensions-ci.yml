@@ -16,13 +16,12 @@ env:
   DOCMAKER_GITHUB_TOKEN: ${{ secrets.DOCMAKER_GITHUB_TOKEN }}
 
 jobs:
-  
   run-tests:
     strategy:
       matrix:
         platform: [ubuntu-latest, windows-latest]
         matlab-version: [R2023b, R2024b, R2025b]
-    runs-on: ${{ matrix.platform }}    
+    runs-on: ${{ matrix.platform }}
     continue-on-error: false
     steps:
       - name: Check out the repository
@@ -33,16 +32,26 @@ jobs:
         run: |
           sudo apt-get install -y xvfb
           Xvfb :99 &
-          echo "DISPLAY=:99" >> $GITHUB_ENV      
+          echo "DISPLAY=:99" >> $GITHUB_ENV
+
+      - name: Download MATLAB DocMaker Toolbox
+        run: |
+          wget -O MATLAB_DocMaker.mltbx https://github.com/mathworks/docmaker/releases/latest/download/MATLAB_DocMaker.mltbx
 
       - name: Set up MATLAB on the runner
         uses: matlab-actions/setup-matlab@v2
         with:
-          products: >
+          products: |
             MATLAB
             Simulink
             Parallel_Computing_Toolbox
           release: ${{ matrix.matlab-version }}
+
+      - name: Install Toolbox
+        uses: matlab-actions/run-command@v2
+        with:
+          command: |
+            matlab.addons.install('MATLAB_DocMaker.mltbx');
 
       - name: Run the toolbox tests
         uses: matlab-actions/run-tests@v2
@@ -50,46 +59,46 @@ jobs:
   package-and-release-toolbox:
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Check out the repository
-      uses: actions/checkout@v4
+      - name: Check out the repository
+        uses: actions/checkout@v4
 
-    - name: Extract version from tag
-      shell: bash
-      run: |
-        VERSION="${GITHUB_REF#refs/tags/v}"
-        echo "VERSION=$VERSION" >> $GITHUB_ENV
+      - name: Extract version from tag
+        shell: bash
+        run: |
+          VERSION="${GITHUB_REF#refs/tags/v}"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-    - name: Extract release notes
-      shell: bash
-      id: extract_notes
-      run: |
-        TAG_NAME="${GITHUB_REF#refs/tags/v}"        
-        awk "/^## Version $TAG_NAME\$/ {flag=1; next} /^## Version / {flag=0} flag" tbx/testframeworkextensionsdoc/changelog.md > RELEASE_NOTES.md        
-        sed -i ':a;/^\n*$/{$d;N;ba}' RELEASE_NOTES.md        
-        echo "notes<<EOF" >> $GITHUB_OUTPUT
-        cat RELEASE_NOTES.md >> $GITHUB_OUTPUT
-        echo "EOF" >> $GITHUB_OUTPUT
+      - name: Extract release notes
+        shell: bash
+        id: extract_notes
+        run: |
+          TAG_NAME="${GITHUB_REF#refs/tags/v}"
+          awk "/^## Version $TAG_NAME\$/ {flag=1; next} /^## Version / {flag=0} flag" tbx/testframeworkextensionsdoc/changelog.md > RELEASE_NOTES.md
+          sed -i ':a;/^\n*$/{$d;N;ba}' RELEASE_NOTES.md
+          echo "notes<<EOF" >> $GITHUB_OUTPUT
+          cat RELEASE_NOTES.md >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
-    - name: Set up MATLAB on the runner
-      uses: matlab-actions/setup-matlab@v2
-      with:
-        products: MATLAB
-        release: R2025b
+      - name: Set up MATLAB on the runner
+        uses: matlab-actions/setup-matlab@v2
+        with:
+          products: MATLAB
+          release: R2025b
 
-    - name: Package toolbox
-      uses: matlab-actions/run-build@v2
-      with:
-        tasks: package
-        build-options: -skip test -skip check
+      - name: Package toolbox
+        uses: matlab-actions/run-build@v2
+        with:
+          tasks: package
+          build-options: -skip test -skip check
 
-    - name: Release toolbox
-      uses: softprops/action-gh-release@v2
-      with:
-        name: Test Framework Extensions ${{ env.VERSION }}
-        tag_name: v${{ env.VERSION }}
-        body: ${{ steps.extract_notes.outputs.notes }}
-        draft: false
-        make_latest: true
-        files: releases/TestFrameworkExtensions.mltbx
+      - name: Release toolbox
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Test Framework Extensions ${{ env.VERSION }}
+          tag_name: v${{ env.VERSION }}
+          body: ${{ steps.extract_notes.outputs.notes }}
+          draft: false
+          make_latest: true
+          files: releases/TestFrameworkExtensions.mltbx
