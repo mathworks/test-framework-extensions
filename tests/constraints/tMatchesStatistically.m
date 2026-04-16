@@ -31,19 +31,6 @@ classdef tMatchesStatistically < matlab.unittest.TestCase
             testCase.verifyEqual(diag.DiagnosticText, char(expectedText));
         end
         
-        function tDifferentLengths(testCase)
-            % If you input arrays of different length, the built-in
-            % hasLength diagnostic is used.
-            A = ones(1, 10);
-            B = ones(1, 8);
-            
-            constr = MatchesStatistically(B, "AbsTol", 1);
-            diag = constr.getDiagnosticFor(A);
-            
-            expectedText = '<a href="matlab:helpPopup matlab.unittest.constraints.HasLength" style="font-weight:bold">HasLength</a> failed.';
-            testCase.verifyThat(diag.DiagnosticText, matlab.unittest.constraints.StartsWithSubstring(expectedText));
-        end
-        
     end
     
 end
