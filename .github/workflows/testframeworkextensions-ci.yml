@@ -51,11 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v4
-
-      - name: Download MATLAB DocMaker Toolbox
-        run: |
-          wget -O MATLAB_DocMaker.mltbx https://github.com/mathworks/docmaker/releases/latest/download/MATLAB_DocMaker.mltbx
+        uses: actions/checkout@v4     
 
       - name: Extract version from tag
         shell: bash
@@ -80,11 +76,13 @@ jobs:
           products: MATLAB
           release: R2025b
 
-      - name: Install DocMaker
+      - name: Download and Install DocMaker
         uses: matlab-actions/run-command@v2
         with:
           command: |
-            matlab.addons.install("MATLAB_DocMaker.mltbx");
+            toolboxFile = websave( "MATLAB_DocMaker.mltbx", "https://github.com/mathworks/docmaker/releases/latest/download/MATLAB_DocMaker.mltbx" );
+            fileCleanup = onCleanup( @() delete( toolboxFile ) );
+            matlab.addons.install( toolboxFile );
 
       - name: Package toolbox
         uses: matlab-actions/run-build@v2
