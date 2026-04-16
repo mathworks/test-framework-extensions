@@ -82,7 +82,7 @@ jobs:
           command: |
             toolboxFile = websave( "MATLAB_DocMaker.mltbx", "https://github.com/mathworks/docmaker/releases/latest/download/MATLAB_DocMaker.mltbx" );
             fileCleanup = onCleanup( @() delete( toolboxFile ) );
-            matlab.addons.install( toolboxFile );
+            matlab.addons.install( toolboxFile, true );
 
       - name: Package toolbox
         uses: matlab-actions/run-build@v2
