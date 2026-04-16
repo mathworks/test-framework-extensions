@@ -13,7 +13,7 @@ permissions:
   contents: write
 
 env:
-      DOCMAKER_GITHUB_TOKEN: ${{ secrets.DOCMAKER_GITHUB_TOKEN }}
+  DOCMAKER_GITHUB_TOKEN: ${{ secrets.DOCMAKER_GITHUB_TOKEN }}
 
 jobs:
   
