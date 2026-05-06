@@ -20,7 +20,7 @@ jobs:
     strategy:
       matrix:
         platform: [ubuntu-latest, windows-latest]
-        matlab-version: [R2023b, R2024b, R2025b]
+        matlab-version: [R2023b, R2024b, R2025b, R2026a]
     runs-on: ${{ matrix.platform }}
     continue-on-error: false
     steps:
@@ -74,7 +74,7 @@ jobs:
         uses: matlab-actions/setup-matlab@v2
         with:
           products: MATLAB
-          release: R2025b
+          release: R2026a
 
       - name: Download and Install DocMaker
         uses: matlab-actions/run-command@v2
