@@ -1,0 +1,10 @@
+# Release notes
+
+## Version 1.0.1
+
+* Updated toolbox short name to `testext`
+* Fixed inconsistent naming
+
+## Version 1.0
+
+* Initial public release :tada: :unlock:

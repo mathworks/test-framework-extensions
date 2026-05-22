@@ -60,7 +60,7 @@ end % buildfile
 function n = tbxname()
 %tbxname  Toolbox name
 
-n = "testframeworkextensions";
+n = "testext";
 
 end % tbxname
 

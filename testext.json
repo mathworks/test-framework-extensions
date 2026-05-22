@@ -6,6 +6,6 @@
     "AuthorName":"Tim Johns, Ken Deeley",
     "AuthorEmail":"timjohns@mathworks.com; kdeeley@mathworks.com",
     "ToolboxFolder":"./tbx",
-    "ToolboxMatlabPath": ["./tbx", "./tbx/testframeworkextensions", "./tbx/testframeworkextensions/constraints", "./tbx/testframeworkextensions/fixtures", "./tbx/testframeworkextensionsdoc"],
+    "ToolboxMatlabPath": ["./tbx", "./tbx/testext", "./tbx/testext/constraints", "./tbx/testext/fixtures", "./tbx/testextdoc"],
     "MinimumMatlabRelease":"R2023b"
 }
