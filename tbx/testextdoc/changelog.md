@@ -1,5 +1,9 @@
 # Release notes
 
+## Version 1.0.2
+
+* Updated README with badge
+
 ## Version 1.0.1
 
 * Updated toolbox short name to `testext`
