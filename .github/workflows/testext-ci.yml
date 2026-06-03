@@ -75,7 +75,7 @@ jobs:
             matlab.addons.install( toolboxFile, true );
 
             % Extract the latest release notes
-            logLines = readlines( "tbx/testext/Changelog.md" );
+            logLines = readlines( "tbx/testextdoc/Changelog.md" );
             startIdx = find( logLines == "## Version " + getenv( "TOOLBOX_VERSION" ) );            
             allVersionLines = find( startsWith( logLines, "##" ) );
             endIdx = allVersionLines(find( allVersionLines > startIdx, 1 )) - 1;
