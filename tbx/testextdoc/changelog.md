@@ -1,5 +1,9 @@
 # Release notes
 
+## Version 1.0.3
+
+* Extracted release notes using MATLAB code
+
 ## Version 1.0.2
 
 * Updated README with badge
