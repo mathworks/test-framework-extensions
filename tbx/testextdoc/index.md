@@ -15,6 +15,7 @@ The Test Framework Extensions toolbox provides custom [constraints](https://www.
 
 ### Fixtures
 * [`FigureFixture`](FigureFixture.md) - create a figure and close it on teardown.
+* [`GridLayoutFixture`](GridLayoutFixture.md) - create a grid layout and delete it on teardown.
 * [`PreferenceFixture`](PreferenceFixture.md) - override a MATLAB preference and restore it on teardown.
 * [`SimulinkModelFixture`](PreferenceFixture.md) - load a Simulink model and close it on teardown.
 * [`SuppressParpoolAutocreateFixture`](SuppressParpoolAutocreateFixture.md) - suppress the automatic creation of parpools and restore the original setting in teardown.

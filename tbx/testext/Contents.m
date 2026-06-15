@@ -1,5 +1,5 @@
 % Test Framework Extensions
-% Version 1.0.3 (R2026a) 03-Jun-2026
+% Version 1.0.4 (R2026a) 15-Jun-2026
 %
 % Constraints
 %
@@ -16,6 +16,7 @@
 % Fixtures
 %
 % FigureFixture
+% GridLayoutFixture
 % PreferenceFixture
 % SimulinkModelFixture
 % SuppressParpoolAutocreateFixture

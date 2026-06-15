@@ -14,6 +14,7 @@
     * [PassesEventData](PassesEventData.md)
   * [Fixtures]()
     * [FigureFixture](FigureFixture.md)
+    * [GridLayoutFixture](GridLayoutFixture.md)
     * [PreferenceFixture](PreferenceFixture.md)
     * [SimulinkModelFixture](SimulinkModelFixture.md)
     * [SuppressParpoolAutocreateFixture](SuppressParpoolAutocreateFixture.md)

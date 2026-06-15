@@ -1,5 +1,9 @@
 # Release notes
 
+## Version 1.0.4
+
+* Added `GridLayoutFixture`
+
 ## Version 1.0.3
 
 * Extracted release notes using MATLAB code
