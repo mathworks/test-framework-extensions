@@ -2,7 +2,7 @@
 
 ## Version 1.0.4
 
-* Added `GridLayoutFixture`
+* Added grid layout fixture
 
 ## Version 1.0.3
 
