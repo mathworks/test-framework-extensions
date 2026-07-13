@@ -20,4 +20,7 @@ The Test Framework Extensions toolbox provides custom [constraints](https://www.
 * [`SimulinkModelFixture`](PreferenceFixture.md) - load a Simulink model and close it on teardown.
 * [`SuppressParpoolAutocreateFixture`](SuppressParpoolAutocreateFixture.md) - suppress the automatic creation of parpools and restore the original setting in teardown.
 
+### Alias
+* [`Testable`](Testable.md) - alias for `matlab.uitest.TestCase`
+
 The documentation provides examples of how to use these constraints and fixtures.

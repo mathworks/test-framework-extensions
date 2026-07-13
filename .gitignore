@@ -1,6 +1,6 @@
 .buildtool/
 releases/
-tbx/testframeworkextensionsdoc/*.html
-tbx/testframeworkextensionsdoc/*.xml
-tbx/testframeworkextensionsdoc/resources
-tbx/testframeworkextensionsdoc/helpsearch-v4_en/
+tbx/testextdoc/*.html
+tbx/testextdoc/*.xml
+tbx/testextdoc/resources
+tbx/testextdoc/helpsearch-v4_en/

@@ -1,5 +1,9 @@
 # Release notes
 
+## Version 1.0.6
+
+* Added `Testable` alias
+
 ## Version 1.0.5
 
 * Added support for `code font` in release notes
