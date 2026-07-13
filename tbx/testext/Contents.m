@@ -1,5 +1,5 @@
 % Test Framework Extensions
-% Version 1.0.5 (R2026a) 16-Jun-2026
+% Version 1.0.6 (R2026a) 13-Jul-2026
 %
 % Constraints
 %
@@ -20,5 +20,9 @@
 % PreferenceFixture
 % SimulinkModelFixture
 % SuppressParpoolAutocreateFixture
+%
+% Alias
+%
+% Testable
 
 % Copyright 2026 The MathWorks, Inc.
