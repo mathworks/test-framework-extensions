@@ -21,6 +21,10 @@
 % SimulinkModelFixture
 % SuppressParpoolAutocreateFixture
 %
+% Plugins
+%
+% FailOnSpecificWarningsPlugin
+%
 % Alias
 %
 % Testable

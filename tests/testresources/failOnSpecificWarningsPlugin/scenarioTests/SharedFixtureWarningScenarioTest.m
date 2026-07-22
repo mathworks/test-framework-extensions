@@ -1,8 +1,14 @@
 classdef (SharedTestFixtures={TargetWarningSharedFixture}) ...
         SharedFixtureWarningScenarioTest < matlab.unittest.TestCase
-    methods (Test)
+
+    methods ( Test )
+
         function testBody(testCase)
+
             testCase.verifyTrue(true);
-        end
-    end
-end
+
+        end % testBody
+
+    end % methods ( Test )
+
+end % classdef

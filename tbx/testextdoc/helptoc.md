@@ -18,5 +18,7 @@
     * [PreferenceFixture](PreferenceFixture.md)
     * [SimulinkModelFixture](SimulinkModelFixture.md)
     * [SuppressParpoolAutocreateFixture](SuppressParpoolAutocreateFixture.md)
+  * [Plugins]()
+    * [FailOnSpecificWarningsPlugin](FailOnSpecificWarningsPlugin.md)
   * [Alias]()
     * [Testable](Testable.md)

@@ -1,14 +1,24 @@
 classdef TestClassSetupWarningScenarioTest < matlab.unittest.TestCase
-    methods (TestClassSetup)
+
+    methods ( TestClassSetup )
+
         function issueSetupWarning(~)
+
             warning("FailOnSpecificWarningsPluginTest:Target", ...
                 "Test class setup target warning.");
-        end
-    end
 
-    methods (Test)
+        end % issueSetupWarning
+
+    end % methods ( TestClassSetup )
+
+    methods ( Test )
+
         function testBody(testCase)
+
             testCase.verifyTrue(true);
-        end
-    end
-end
+
+        end % testBody
+
+    end % methods ( Test )
+
+end % classdef

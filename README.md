@@ -4,7 +4,7 @@
 [![Open in MATLAB Online](readme/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=mathworks/test-framework-extensions&project=TestFrameworkExtensions.prj)
 [![Test Framework Extensions Actions](https://github.com/mathworks/test-framework-extensions/actions/workflows/testext-ci.yml/badge.svg)](https://github.com/mathworks/test-framework-extensions/actions/workflows/testext-ci.yml)
 
-The Test Framework Extensions toolbox provides a number of custom [constraints](https://www.mathworks.com/help/matlab/ref/matlab.unittest.constraints.constraint-class.html) and [fixtures](https://www.mathworks.com/help/matlab/ref/matlab.unittest.fixtures.fixture-class.html) to aid the testing of MATLAB code.
+The Test Framework Extensions toolbox provides a number of custom [constraints](https://www.mathworks.com/help/matlab/ref/matlab.unittest.constraints.constraint-class.html), [fixtures](https://www.mathworks.com/help/matlab/ref/matlab.unittest.fixtures.fixture-class.html), and [plugins](https://www.mathworks.com/help/matlab/ref/matlab.unittest.plugins.testrunnerplugin-class.html) to aid the testing of MATLAB code.
 
 ### Constraints
 * `DatetimeTolerance` - allow non-exact matching of datetimes and durations.
@@ -24,7 +24,10 @@ The Test Framework Extensions toolbox provides a number of custom [constraints](
 * `SimulinkModelFixture` - load a Simulink model and close it on teardown.
 * `SuppressParpoolAutocreateFixture` - suppress the automatic creation of parpools and restore the original setting in teardown.
 
-The documentation provides examples of how to use these constraints and fixtures.
+### Plugins
+* `FailOnSpecificWarningsPlugin` - fail tests that issue selected warnings.
+
+The documentation provides examples of how to use these constraints, fixtures, and plugins.
 
 See also the [database testing framework](https://www.mathworks.com/matlabcentral/fileexchange/77101-database-testing-framework).
 

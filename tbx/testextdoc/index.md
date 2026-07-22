@@ -1,6 +1,6 @@
 # Test Framework Extensions Toolbox
 
-The Test Framework Extensions toolbox provides custom [constraints](https://www.mathworks.com/help/matlab/ref/matlab.unittest.constraints.constraint-class.html) and [fixtures](https://www.mathworks.com/help/matlab/ref/matlab.unittest.fixtures.fixture-class.html) to aid the testing of MATLAB code.
+The Test Framework Extensions toolbox provides custom [constraints](https://www.mathworks.com/help/matlab/ref/matlab.unittest.constraints.constraint-class.html), [fixtures](https://www.mathworks.com/help/matlab/ref/matlab.unittest.fixtures.fixture-class.html), and plugins to aid the testing of MATLAB code.
 
 ### Constraints
 * [`DatetimeTolerance`](DatetimeTolerance.md) - allow non-exact matching of datetimes and durations.
@@ -20,7 +20,10 @@ The Test Framework Extensions toolbox provides custom [constraints](https://www.
 * [`SimulinkModelFixture`](PreferenceFixture.md) - load a Simulink model and close it on teardown.
 * [`SuppressParpoolAutocreateFixture`](SuppressParpoolAutocreateFixture.md) - suppress the automatic creation of parpools and restore the original setting in teardown.
 
+### Plugins
+* [`FailOnSpecificWarningsPlugin`](FailOnSpecificWarningsPlugin.md) - fail tests that issue selected warnings.
+
 ### Alias
 * [`Testable`](Testable.md) - alias for `matlab.uitest.TestCase`
 
-The documentation provides examples of how to use these constraints and fixtures.
+The documentation provides examples of how to use these constraints, fixtures, and plugins.

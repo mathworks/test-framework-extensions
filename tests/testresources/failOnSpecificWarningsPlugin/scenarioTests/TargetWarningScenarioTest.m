@@ -1,9 +1,15 @@
 classdef TargetWarningScenarioTest < matlab.unittest.TestCase
-    methods (Test)
+
+    methods ( Test )
+
         function testTargetWarning(testCase)
+
             warning("FailOnSpecificWarningsPluginTest:Target", "Target warning.");
 
             testCase.verifyTrue(true);
-        end
-    end
-end
+
+        end % testTargetWarning
+
+    end % methods ( Test )
+
+end % classdef
