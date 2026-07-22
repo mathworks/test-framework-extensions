@@ -27,6 +27,9 @@ The Test Framework Extensions toolbox provides a number of custom [constraints](
 ### Plugins
 * `FailOnSpecificWarningsPlugin` - fail tests that issue selected warnings.
 
+### Alias
+* `Testable` - alias for [`matlab.uitest.TestCase`](https://www.mathworks.com/help/matlab/ref/matlab.uitest.testcase-class.html)
+
 The documentation provides examples of how to use these constraints, fixtures, and plugins.
 
 See also the [database testing framework](https://www.mathworks.com/matlabcentral/fileexchange/77101-database-testing-framework).
