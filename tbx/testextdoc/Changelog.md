@@ -1,5 +1,10 @@
 # Release notes
 
+## Version 1.0.7
+
+* Added `FailOnSpecificWarningsPlugin`
+* Added landing pages for documentation categories
+
 ## Version 1.0.6
 
 * Added `Testable` alias

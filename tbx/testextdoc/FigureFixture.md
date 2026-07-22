@@ -2,6 +2,8 @@
 
 A custom MATLAB unit test fixture for managing the lifecycle of a `uifigure` during testing.
 
+**Note:** from R2026b onwards, you can use the [`UIFigureFixture`](https://www.mathworks.com/help/matlab/ref/matlab.unittest.fixtures.uifigurefixture-class.html) class provided with MATLAB instead of this custom fixture.
+
 ## Overview
 
 `FigureFixture` is a subclass of [`matlab.unittest.fixtures.Fixture`](https://www.mathworks.com/help/matlab/ref/matlab.unittest.fixtures.fixture.html) designed to create and clean up a `uifigure` for use in unit tests. It enables tests to use a new figure, optionally configured via name-value arguments, and ensures the figure is deleted after the test completes.
@@ -58,3 +60,4 @@ end
 
 - [`matlab.unittest.fixtures.Fixture`](https://www.mathworks.com/help/matlab/ref/matlab.unittest.fixtures.fixture-class.html)
 - [`uifigure`](https://www.mathworks.com/help/matlab/ref/uifigure.html)
+- [`UIFigureFixture`](https://www.mathworks.com/help/matlab/ref/matlab.unittest.fixtures.uifigurefixture-class.html) (available from R2026b)
