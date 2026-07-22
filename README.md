@@ -38,7 +38,7 @@ See also the [database testing framework](https://www.mathworks.com/matlabcentra
 1. Test Framework Extensions is provided as a [MATLAB Toolbox](https://www.mathworks.com/help/matlab/creating-help.html). Download the toolbox file (`TestFrameworkExtensions.mltbx`).
 2. Double-click on the file `TestFrameworkExtensions.mltbx` to install it.
 3. Complete the installation process.
-4. Verify the toolbox installation by entering `>> ver testframeworkextensions` at the MATLAB command line.
+4. Verify the toolbox installation by entering `>> ver testext` at the MATLAB command line.
 
 ### [MathWorks](https://www.mathworks.com) Product Requirements
 
